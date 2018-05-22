@@ -42,3 +42,8 @@ registry_key "HKLM\\Software\\Policies\\Microsoft\\Internet Explorer\\Main" do
   action :create
   recursive true
 end
+
+dsc_resource 'IIS' do
+  resource :windowsfeature
+  property :name, 'web-server'
+end
