@@ -77,3 +77,15 @@ end
 net_adapter "Local" do
   interface_index 3 # USE THE INTERFACE INDEX RETURNED BY OUR COMMAND ABOVE
 end
+
+user node['mwwfy']['alternate_user']  do
+  comment 'another'
+  password node['mwwfy']['alternate_password']
+  action :create
+end
+
+puts "Alternate User from Mixlib::Shellout"
+# This next block does not work
+###puts (Mixlib::ShellOut.new('whoami.exe', 
+###  :user => node['mwwfy']['alternate_user'], 
+###  :password => node['mwwfy']['alternate_password'])).run_command.stdout
