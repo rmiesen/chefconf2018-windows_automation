@@ -72,3 +72,8 @@ dsc_resource 'ChefConf Workshop Site' do
   module_version x_web_administration_version
   property :name, 'ChefConf'
 end
+
+
+net_adapter "Local" do
+  interface_index 3 # USE THE INTERFACE INDEX RETURNED BY OUR COMMAND ABOVE
+end
