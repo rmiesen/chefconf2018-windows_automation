@@ -47,3 +47,28 @@ dsc_resource 'IIS' do
   resource :windowsfeature
   property :name, 'web-server'
 end
+
+# PowerShell 5 introduces side by side versioning
+# And if there are multiple versions, dsc_resource requires
+# us to supply a version
+
+x_web_administration_version = '1.20.0.0'
+
+powershell_package "xWebAdministration" do
+  version x_web_administration_version
+end
+
+dsc_resource 'Default Web Site' do
+  resource :xWebSite
+  module_name 'xWebAdministration'
+  module_version x_web_administration_version
+  property :name, 'Default Web Site'
+  property :state, 'Stopped'
+end
+
+dsc_resource 'ChefConf Workshop Site' do
+  resource :xWebSite
+  module_name 'xWebAdministration'
+  module_version x_web_administration_version
+  property :name, 'ChefConf'
+end
