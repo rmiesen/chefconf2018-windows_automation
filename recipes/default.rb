@@ -18,3 +18,16 @@ file 'C:\hello.txt' do
 
   notifies :reboot_now, 'reboot[Restarting for fun and profit]', :immediately
 end
+
+
+registry_key "HKLM\\Software\\Policies\\Microsoft\\Internet Explorer\\Main" do
+
+  values [{
+    name: "Isolation64Bit",
+    type: :dword,
+    data: 1
+  }]
+
+  action :create
+  recursive true
+end
